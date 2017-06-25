@@ -10,7 +10,14 @@
  * @property {string} description
  * @method   getDetails
  */
-
+ function Spell (name, cost, description) {
+  this.name = name;
+  this.cost = cost;
+  this.description = description;
+  this.getDetails = function () {
+    return "Spell " + this.name + " " + this.cost + " " + this.description;
+  };
+}
   /**
    * Returns a string of all of the spell's details.
    * The format doesn't matter, as long as it contains the spell name, cost, and description.
@@ -43,6 +50,11 @@
  * @property {number} damage
  * @property {string} description
  */
+ function DamageSpell (name, cost, damage, description) {
+  Spell.call(this, name, cost, description);
+  this.damage = damage;
+}
+DamageSpell.prototype = Object.create (Spell.prototype);
 
 /**
  * Now that you've created some spells, let's create
@@ -60,7 +72,12 @@
  * @method  spendMana
  * @method  invoke
  */
-
+ function Spellcaster(name, health, mana) {
+  this.name = name ;
+  this.health = health;
+  this.mana = mana;
+  this.isAlive = true;
+}
   /**
    * @method inflictDamage
    *
@@ -71,7 +88,9 @@
    *
    * @param  {number} damage  Amount of damage to deal to the spellcaster
    */
-
+   Spellcaster.prototype.inflictDamage = function(damage) {
+    console.log(this.DamageSpell);
+   };
   /**
    * @method spendMana
    *
